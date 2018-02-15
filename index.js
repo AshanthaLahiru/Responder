@@ -1,15 +1,9 @@
 module.exports = (robot) => {
-  // Your code here
-  robot.log('Yay, the app was loaded!')
+  robot.on('pull_request.opened', async context => {
 
-  // For more information on building apps:
-  // https://probot.github.io/docs/
+    let days = "{{days}}";
+    const params = context.issue({body: 'We appreciate your contribution towards the project will get back to you within ' + days + '}'});
 
-  // To get your app running against GitHub, see:
-  // https://probot.github.io/docs/development/
-
-  robot.on('issues.opened', async context => {
-    // A new issue was opened, what should we do with it?
-    context.log(context.payload)
+    return context.github.pullRequests.createComment(params);
   })
 }
