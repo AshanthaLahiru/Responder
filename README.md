@@ -1,6 +1,6 @@
 # sert
 
-> a GitHub App built with [probot](https://github.com/probot/probot) that set expectations for response time
+> A GitHub App built with [probot](https://github.com/probot/probot) that set expectations for response time
 
 ## Setup
 
