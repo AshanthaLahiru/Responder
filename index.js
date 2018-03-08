@@ -28,7 +28,9 @@ module.exports = (robot) => {
         console.log(contributorsIds);
         console.log("<<<<<<<<IDs");
 
-        return context.github.issues.getForRepo(contextSummary)
+        let issueParams = context.issue({state: "all"});
+
+        return context.github.issues.getForRepo(issueParams)
           .then(issuesForRepo => {
 
             let asyncActivities = [];
@@ -108,7 +110,7 @@ module.exports = (robot) => {
         }
         const commentParams = context.issue({ body: commentMessage });
 
-        return context.github.issues.createComment(commentParams);
+        // return context.github.issues.createComment(commentParams);
       })
   })
 }
