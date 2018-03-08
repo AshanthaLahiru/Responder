@@ -110,7 +110,7 @@ module.exports = (robot) => {
         }
         const commentParams = context.issue({ body: commentMessage });
 
-        // return context.github.issues.createComment(commentParams);
+        return context.github.issues.createComment(commentParams);
       })
   })
 }
