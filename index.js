@@ -16,10 +16,18 @@ module.exports = (robot) => {
             contributorsIds.push(contributor.id);
           })
         }
+        if (!contributorsIds.includes(context.payload.repository.owner.id)) {
+          contributorsIds.push(context.payload.repository.owner.id);
+        }
 
         return contributorsIds;
       })
       .then(contributorsIds => {
+
+        console.log(">>>>>>>>IDs");
+        console.log(contributorsIds);
+        console.log("<<<<<<<<IDs");
+
         return context.github.issues.getForRepo(contextSummary)
           .then(issuesForRepo => {
 
@@ -33,7 +41,7 @@ module.exports = (robot) => {
                       .then(commentsForIssue => {
 
                         if (commentsForIssue.data.length == 0) {
-                          return 0;
+                          return -1;
                         } else {
                           for (let x = 0; x < commentsForIssue.data.length; x++) {
                             let comment = commentsForIssue.data[x];
@@ -44,7 +52,7 @@ module.exports = (robot) => {
                               return firstResponseTime;
                               break;
                             } else if (x == commentsForIssue.data.length - 1) {
-                              return 0;
+                              return -1;
                             }
                           }
                         }
@@ -60,16 +68,27 @@ module.exports = (robot) => {
       })
       .then(firstResponseTimes => {
 
-        let totalTime = 0;
+        console.log(">>>>>>>>firstResponseTimes");
+        console.log(firstResponseTimes);
+        console.log("<<<<<<<<firstResponseTimes");
+
+        let totalTime = 0, totalCount = 0;
         for (let x = 0; x < firstResponseTimes.length; x++) {
-          if (firstResponseTimes[x]) {
+          if (firstResponseTimes[x] && firstResponseTimes[x] != -1) {
             totalTime += firstResponseTimes[x];
+            totalCount++;
           }
         }
-        console.log(totalTime)
-        console.log(firstResponseTimes.length)
 
-        let averageResponseTime = totalTime / firstResponseTimes.length;
+        console.log(">>>>>>>>totalTime");
+        console.log(totalTime);
+        console.log("<<<<<<<<totalTime");
+
+        console.log(">>>>>>>>totalCount");
+        console.log(totalCount);
+        console.log("<<<<<<<<totalCount");
+
+        let averageResponseTime = totalTime / totalCount;
         let formattedResponseTime;
         if (!totalTime || totalTime == 0) {
           formattedResponseTime = "soon";
