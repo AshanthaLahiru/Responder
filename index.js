@@ -104,7 +104,7 @@ module.exports = (robot) => {
         if (formattedResponseTime == "soon") {
           commentMessage = 'Thank you for openning an issue. We appreciate your contribution towards the project, someone will get back to you ' + formattedResponseTime + '. :hourglass: ';
         } else {
-          commentMessage = 'Thank you for openning an issue. We appreciate your contribution towards the project, someone will get back to you within ' + formattedResponseTime + '. :hourglass: ';
+          commentMessage = 'Thank you for openning an issue. We appreciate your contribution towards the project, based on past issues someone will get back to you within ' + formattedResponseTime + '. :hourglass: ';
         }
         const commentParams = context.issue({ body: commentMessage });
 
