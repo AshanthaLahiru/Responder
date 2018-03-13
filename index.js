@@ -4,9 +4,7 @@ module.exports = (robot) => {
   robot.on('issues.opened', async context => {
     const contextSummary = context.issue();
 
-    commentsForRepoParams = context.issue({ number: 29 });
-
-    context.github.repos.getContributors(commentsForRepoParams)
+    context.github.repos.getContributors(contextSummary)
       .then(contributors => {
 
         contributorsIds = [];
@@ -38,7 +36,7 @@ module.exports = (robot) => {
               issuesForRepo.data.forEach(issue => {
                 if (contextSummary.number != issue.number) {
                   asyncActivities.push(() => {
-                    commentsForRepoParams = context.issue({ number: issue.number });
+                    let commentsForRepoParams = context.issue({ number: issue.number });
                     return context.github.issues.getComments(commentsForRepoParams)
                       .then(commentsForIssue => {
 
