@@ -4,6 +4,9 @@
 
 ![sert](https://user-images.githubusercontent.com/24356443/37246416-91213284-24ce-11e8-9140-04c9a6a905de.PNG)
 
+## Demo
+![sert](https://user-images.githubusercontent.com/24356443/37774892-714738c2-2e07-11e8-8c25-c14eed0790a4.gif)
+
 ## How does the response time generate?
 
 Once a issue is created, average response time of the initial responses given by the contributors of the repository or the organization to previous issues is calculated.
