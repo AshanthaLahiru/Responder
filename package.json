@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "github": "^13.1.0",
-    "probot": "^5.0.0"
+    "moment": "^2.22.0",
+    "probot": "^5.0.0",
+    "probot-metadata": "^1.0.0",
+    "probot-scheduler": "^1.0.3"
   },
   "devDependencies": {
     "jest": "^21.2.1",
