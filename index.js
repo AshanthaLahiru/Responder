@@ -1,5 +1,8 @@
 const createScheduler = require('probot-scheduler')
-const Core = require('./bin/core')
+const commands = require('probot-commands')
+const categorizer = require('./bin/categorizer')
+const reminder = require('./bin/reminder')
+const responder = require('./bin/responder')
 
 module.exports = (robot) => {
   const events = [
@@ -7,7 +10,9 @@ module.exports = (robot) => {
     'issues.opened'
   ]
 
-  createScheduler(robot, { interval: 1 * 30 * 1000 })
-  robot.on(events, Core.setResponseTime)
-  robot.on('schedule.repository', Core.updateLabels)
+  createScheduler(robot, { interval: 1 * 60 * 1000 })
+
+  robot.on(events, responder.setResponse)
+  robot.on('schedule.repository', reminder.setReminder)
+  commands(robot, 'cat', categorizer.addCategory)
 }
