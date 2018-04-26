@@ -56,8 +56,8 @@ categorizer:
   #Is categorizing function switched on
   available: true
   
-  guideComment: Hello there, it will be helpful if you choose one of following categories.
-  errorComment: There is no such a category :worried:, please use a following category.
+  guide_comment: Hello there, it will be helpful if you choose one of following categories.
+  error_comment: There is no such a category :worried:, please use a following category.
  
   #Categories configuration
       #Category keyword - Mandotory
