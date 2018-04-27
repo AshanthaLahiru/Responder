@@ -78,7 +78,12 @@ module.exports = {
             console.log(totalCount)
             console.log('<<<<<<<<totalCount')
 
-            let averageResponseTime = totalTime / totalCount
+            let averageResponseTime = totalTime / totalCount 
+
+            if(config.response.buffer_time) {
+                averageResponseTime += moment.duration(Number(config.response.buffer_time.split(' ')[0]), config.response.buffer_time.split(' ')[1]).asSeconds()
+            }
+
             let formattedResponseTime
             if (!totalTime || totalTime === 0) {
                 formattedResponseTime = 'soon'
