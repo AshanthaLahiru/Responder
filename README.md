@@ -21,9 +21,6 @@ response:
   #Is available for issues
   issues: true
 
-  #Calculation based on pull_requests / issues or both
-  calculation_based: both
-
   #Response message
   reponse_message:
     soon_reponse: "Thank you for openning an issue. We appreciate your contribution towards the project, someone will get back to you soon. :hourglass:"

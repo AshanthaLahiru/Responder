@@ -5,7 +5,6 @@ module.exports = {
       {
         pull_requests: true,
         issues: true,
-        calculation_based: 'both',
         reponse_message:
           {
             soon_reponse: 'Thank you for openning an issue. We appreciate your contribution towards the project, someone will get back to you soon.: hourglass: ',
