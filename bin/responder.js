@@ -5,9 +5,6 @@ const metadata = require('probot-metadata')
 module.exports = {
     async setResponse(context) {
         let config
-
-        context.log(context)
-
         try {
             config = await context.config('config.yml', configuration.defaults)
         } catch (err) {

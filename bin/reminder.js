@@ -5,7 +5,6 @@ const configuration = require('./config')
 module.exports = {
     async setReminder(context) {
         let config
-
         try {
             config = await context.config('config.yml', configuration.defaults)
         } catch (err) {

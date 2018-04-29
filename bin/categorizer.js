@@ -2,13 +2,14 @@ const configuration = require('./config')
 
 module.exports = {
     async addCategory(context, command) {
-        let asyncActivities = []
-
+        let config
         try {
             config = await context.config('config.yml', configuration.defaults)
         } catch (err) {
             config = configuration.defaults
         }
+
+        let asyncActivities = []        
 
         if (config.categorizer.available) {
             let subCategory = config.categorizer.categories.find(category => {

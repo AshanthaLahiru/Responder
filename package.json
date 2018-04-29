@@ -14,7 +14,7 @@
     "github": "^13.1.0",
     "moment": "^2.22.0",
     "nodemon": "^1.17.3",
-    "probot": "^5.0.0",
+    "probot": "^6.0.0",
     "probot-commands": "^1.0.1",
     "probot-metadata": "^1.0.0",
     "probot-scheduler": "^1.0.3"
