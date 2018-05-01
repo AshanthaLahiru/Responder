@@ -16,7 +16,7 @@ module.exports = {
 
     reminder:
       {
-        available: false,
+        available: true,
         label: {
           waiting: {
             name: 'waiting for response',
@@ -31,7 +31,7 @@ module.exports = {
 
     categorizer:
       {
-        available: false,
+        available: true,
         guide_comment: 'Hello there, it will be helpful if you choose one of following categories.',
         error_comment: 'There is no such a category :worried:, please use a following category.',
         categories: [
