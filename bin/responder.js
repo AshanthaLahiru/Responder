@@ -48,6 +48,8 @@ module.exports = {
 
                             if (firstRespondComment) {
                                 return (Date.parse(firstRespondComment.created_at) - Date.parse(issue.created_at)) / 1000
+                            } else {
+                                return -1
                             }
                         }
                     })
@@ -59,9 +61,11 @@ module.exports = {
                     let totalTime = 0
                     let totalCount = 0
                     for (let x = 0; x < firstResponseTimes.length; x++) {
-                        if (firstResponseTimes[x]) {
+                        if (firstResponseTimes[x] && firstResponseTimes[x] != -1) {
                             totalTime += firstResponseTimes[x]
                             totalCount++
+                        } else if( firstResponseTimes[x] === -1 ) {
+                            totalCount++                            
                         }
                     }
 
