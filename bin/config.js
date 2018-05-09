@@ -11,6 +11,7 @@ module.exports = {
             time_response: 'Thank you for openning an issue. We appreciate your contribution towards the project, based on the past issues someone will get back to you within'
           },
         buffer_time: '1 day',
+        activity_state: 'open',
         activities_count: 20
       },
 

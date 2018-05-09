@@ -32,7 +32,7 @@ module.exports = {
             console.log('<<<<<<<<IDs')
 
             if (!contributorsIds.includes(context.payload.sender.id)) {
-                let issueParams = context.issue({ state: 'all' })
+                let issueParams = context.issue({ state: config.response.activity_state })
                 let issuesForRepo = (await context.github.issues.getForRepo(issueParams)).data
 
                 issuesForRepo = issuesForRepo.slice(0, config.response.activities_count || 10)
