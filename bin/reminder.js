@@ -22,36 +22,62 @@ module.exports = {
                 const { owner, repo, number } = issue
 
                 const timeout = await metadata(context, issue).get('timeout')
-                const due = timeout.due
+                let commentsForIssue = (await context.github.issues.getComments(issue)).data
 
-                if (!due) {
-                    // Malformed metadata, not much we can do
-                    await context.github.issues.removeLabel({
-                        owner,
-                        repo,
-                        number,
-                        name: config.reminder.label.waiting.name
+                let contributorsIds = []
+                if (contributors && Array.isArray(contributors)) {
+                    contributors.forEach(contributor => {
+                        contributorsIds.push(contributor.id)
                     })
-                } else if (moment(due) > moment()) {
-                    const remainingPercentage = ((Date.parse(due) - new Date()) / (Date.parse(due) - Date.parse(timeout.created))) * 100
+                }
+                if (!contributorsIds.includes(context.payload.repository.owner.id)) {
+                    contributorsIds.push(context.payload.repository.owner.id)
+                }
 
-                    const dynamicLabel = `${config.reminder.label.time_out.name}: ${Math.round(remainingPercentage)}% :hourglass_flowing_sand:`
+                let isResponded = commentsForIssue.find(comment => {
+                    return contributorsIds.includes(comment.user.id) 
+                })
 
-                    const labels = issue.labels
+                if (timeout) {
+                    const due = timeout.due
+                    if (!due) {
+                        // Malformed metadata, not much we can do
+                        await context.github.issues.removeLabel({
+                            owner,
+                            repo,
+                            number,
+                            name: config.reminder.label.waiting.name
+                        })
+                    } else if (isResponded) {
+                        const labels = issue.labels
 
-                    const lastLabel = labels.find(label => {
-                        return label.name.split(':')[0] === config.reminder.label.time_out.name
-                    })
-                    if (lastLabel) {
-                        lastLabels.push(lastLabel)
-                        const pos = labels.indexOf(lastLabel)
-                        labels.splice(pos, 1)
+                        let updatedLabels = labels.filter(label => {
+                            return label.name.split(':')[0] !== config.reminder.label.time_out.name || label.name !== config.reminder.label.waiting.name
+                        })
+                        
+                        await context.github.issues.edit({ owner, repo, number, labels: updatedLabels, state: issue.state })                                                
+                    
+                    } else if (moment(due) > moment()) {
+                        const remainingPercentage = ((Date.parse(due) - new Date()) / (Date.parse(due) - Date.parse(timeout.created))) * 100
+
+                        const dynamicLabel = `${config.reminder.label.time_out.name}: ${Math.round(remainingPercentage)}% :hourglass_flowing_sand:`
+
+                        const labels = issue.labels
+
+                        const lastLabel = labels.find(label => {
+                            return label.name.split(':')[0] === config.reminder.label.time_out.name
+                        })
+                        if (lastLabel) {
+                            lastLabels.push(lastLabel)
+                            const pos = labels.indexOf(lastLabel)
+                            labels.splice(pos, 1)
+                        }
+                        labels.push(Object.assign({ name: dynamicLabel }, { color: config.reminder.label.time_out.color }))
+
+                        await context.github.issues.edit({ owner, repo, number, labels, state: issue.state })
+                    } else if (moment(due) <= moment()) {
+                        await context.github.issues.removeLabel({ owner, repo, number, name: config.reminder.label.waiting.name })
                     }
-                    labels.push(Object.assign({ name: dynamicLabel }, { color: config.reminder.label.time_out.color }))
-
-                    await context.github.issues.edit({ owner, repo, number, labels, state: 'open' })
-                } else if (moment(due) <= moment()) {
-                    await context.github.issues.removeLabel({ owner, repo, number, name: config.reminder.label.waiting.name })
                 }
             }))
 

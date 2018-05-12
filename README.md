@@ -9,10 +9,6 @@ In open source projects any new contributor can create pull requests or issues. 
 ## Demo
 ![fwfbzx0lvl](https://user-images.githubusercontent.com/24356443/39797401-9064d0e2-5379-11e8-9d27-e0387242f3e6.gif)
 
-## How does the response time generate?
-
-Once a issue is created, average response time of the initial responses given by the contributors of the repository or the organization to previous issues is calculated.
-
 ## Configuration
 ```sh
 #Response time configuration
