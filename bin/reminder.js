@@ -22,7 +22,7 @@ module.exports = {
                 const { owner, repo, number } = issue
 
                 const timeout = await metadata(context, issue).get('timeout')
-                let commentsForIssue = (await context.github.issues.getComments(issue)).data
+                let commentsForIssue = (await context.github.issues.getComments({ owner, repo, number })).data
 
                 let contributorsIds = []
                 if (contributors && Array.isArray(contributors)) {
@@ -35,7 +35,7 @@ module.exports = {
                 }
 
                 let isResponded = commentsForIssue.find(comment => {
-                    return contributorsIds.includes(comment.user.id) 
+                    return contributorsIds.includes(comment.user.id)
                 })
 
                 if (timeout) {
@@ -54,9 +54,9 @@ module.exports = {
                         let updatedLabels = labels.filter(label => {
                             return label.name.split(':')[0] !== config.reminder.label.time_out.name || label.name !== config.reminder.label.waiting.name
                         })
-                        
-                        await context.github.issues.edit({ owner, repo, number, labels: updatedLabels, state: issue.state })                                                
-                    
+
+                        await context.github.issues.edit({ owner, repo, number, labels: updatedLabels, state: issue.state })
+
                     } else if (moment(due) > moment()) {
                         const remainingPercentage = ((Date.parse(due) - new Date()) / (Date.parse(due) - Date.parse(timeout.created))) * 100
 

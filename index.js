@@ -10,7 +10,7 @@ module.exports = (robot) => {
     'issues.opened'
   ]
 
-  createScheduler(robot, { interval: 1 * 60 * 1000 })
+  createScheduler(robot, { interval: 1 * 60 * 60 * 1000 })
 
   robot.on(events, responder.setResponse)
   robot.on('schedule.repository', reminder.setReminder)
