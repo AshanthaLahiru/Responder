@@ -23,6 +23,7 @@ module.exports = {
 
                 const timeout = await metadata(context, issue).get('timeout')
                 let commentsForIssue = (await context.github.issues.getComments({ owner, repo, number })).data
+                let contributors = (await context.github.repos.getContributors(context.repo(issue))).data
 
                 let contributorsIds = []
                 if (contributors && Array.isArray(contributors)) {
