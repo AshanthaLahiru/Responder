@@ -7,10 +7,11 @@ const responder = require('./bin/responder')
 module.exports = (robot) => {
   const events = [
     'pull_request.opened',
-    'issues.opened'
+    'issues.opened',
+    'issue_comment.created'
   ]
 
-  createScheduler(robot, { interval: 1 * 60 * 60 * 1000 })
+  createScheduler(robot, { interval: 1 * 60 * 1000 })
 
   robot.on(events, responder.setResponse)
   robot.on('schedule.repository', reminder.setReminder)
