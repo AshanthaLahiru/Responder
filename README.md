@@ -1,6 +1,6 @@
 # Responder
 
-> A GitHub Integration built with [Probot](https://github.com/probot) that sets expectation for response time for contributors on creation of new issues.
+> A GitHub Integration built with [Probot](https://github.com/probot) that sets expectation for response for contributors on creation of new issues and pull requests.
 
 ## Description
 
