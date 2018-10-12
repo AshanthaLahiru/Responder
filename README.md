@@ -2,6 +2,10 @@
 
 > A GitHub Integration built with [Probot](https://github.com/probot) that sets expectation for response for contributors on creation of new issues and pull requests.
 
+## Installation
+
+[https://github.com/apps/responder](https://github.com/apps/responder)
+
 ## Description
 
 In open source projects any new contributor can create pull requests or issues. When contributors do one of the following things they always seek for the feedback from the existing contributors (maintainers). As the contributors are unaware when the maintainers will respond them, they have to check the activity of the repository time to time. When contributors are acknowledged properly, it is easy to keep their interest on particular project. The `Responder` is to acknowledge the contributors in a timely manner and to get the attraction of the maintainers towards the contributors in an efficient manner. This will predict the response time by calculating the average of the initial responses given by the maintainers to previous issues and pull requests. Then a bot can acknowledge the contributors when they can receive a response. Also adding a label to indicate the remaining time will grab the attention of the maintainers and help them in responding to contributors. Other than that maintainers can define categories to issues/pull requests beforehand so that contributors can use them and categorize their issues/pull requests.
