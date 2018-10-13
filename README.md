@@ -1,5 +1,9 @@
 # Responder
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/22785263/46908488-18c22280-cf41-11e8-9828-d17a95711b6b.png"/>
+</p>
+
 > A GitHub Integration built with [Probot](https://github.com/probot) that sets expectation for response for contributors on creation of new issues and pull requests.
 
 ## Installation
